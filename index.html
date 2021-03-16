@@ -43,9 +43,42 @@
         </div>
         <div id="parties" class="border rounded p-4 m-4" hidden>
             <h1 class="text-center">Selecteer partijen om mee te nemen naar eind resultaat</h1>
-            <div class="text-center">
+            <div class="col-md-4">
+                <div class="d-flex justify-content-end">
+
+                    <div class="row btn-group btn-group-toggle pb-4" data-toggle="buttons">
+                        <div class="mb-1 col-12 col-md-4">
+                            <label class="w-100 btn btn-white btn-block bg-light rounded">
+                                <input type="checkbox" name="partyRadioButton" class="radio form-check-input mx-1"
+                                    id="allParties">
+                                <p class="m-0 ml-2 text-left"> Alle partijen</p>
+                            </label>
+                        </div>
+
+                        <div class="mb-1 col-12 col-md-4">
+                            <label class="w-100 btn btn-white btn-block bg-light rounded">
+                                <input type="checkbox" name="partyRadioButton" class="radio form-check-input mx-1"
+                                    id="secularParties">
+                                <p class="m-0 ml-2 text-left"> Seculiere partijen</p>
+                            </label>
+                            <button type="button" class="btn btn-primary btn-lg float-right disabled"
+                                id="party-selector-next">
+                                <b>volgende stap</b>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="party-selector-checkboxes" class="row m-0 bg-light"></div>
+                </div>
             </div>
         </div>
+    </div>
+    </div>
+    <div id="results" class="container" hidden>
+        <div id="results" class="p-4 m-4">
+            <h1 id="title" class="text-center">Resultaten</h1>
+        </div>
+        <div id="party-results"></div>
+    </div>
 
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
