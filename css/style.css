@@ -1,7 +1,17 @@
 body {
     background-image: url("../img/background.jpg");
+    background-repeat: no-repeat;
 }
 
 #start-jumbotron {
+    background-color: white;
+    text-align: center;
+}
+
+#statement {
+    background-color: white;
+}
+
+#parties {
     background-color: white;
 }
