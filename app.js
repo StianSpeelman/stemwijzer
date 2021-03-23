@@ -7,10 +7,12 @@ const statementPara = document.getElementById("statement");
 const opinie = document.getElementById("opinie");
 const optionButtons = document.querySelectorAll(".option");
 const selResult = document.getElementById("parties");
+const Field = document.getElementById("parties");
 var userInput = [];
 var statementId = 0;
+var select;
 
-/* best simpel, dit start de stemwijzer */
+/* geen uitleg nodig, dit start de stemwijzer */
 
 function start() {
     jumbotron.hidden = true;
@@ -42,7 +44,7 @@ function keepProgress(choice) {
     }
 
     if (currentSubject >= subjects.length) {
-        return showParties();
+        return generateCheckboxList(parties, Field);
     }
 
     titleHeader.innerText = subjects[currentSubject].title;
@@ -50,7 +52,7 @@ function keepProgress(choice) {
     console.log(userInput);
 }
 
-function showParties() {
+function generateCheckboxList(givenArray, givenField) {
     /*
     display partij namen
     "next" knop die geselecteerde partijen mee neemt
@@ -58,4 +60,79 @@ function showParties() {
     */
     statementPara.hidden = true;
     selResult.hidden = false;
+
+    var checkboxes = "";
+    var classLabel = "";
+
+    if (givenArray == subjects) {
+        checkboxes = "statementCheckbox";
+        classLabel = "statementLabel";
+    }
+
+    if (givenArray == parties) {
+        checkboxes = "partyCheckbox";
+        classLabel = "partyLabel";
+    }
+
+    var loopCount = 0;
+    givenArray.forEach(object => {
+        var newCheckbox = document.createElement("input");
+        newCheckbox.type = "checkbox";
+        newCheckbox.value = loopCount;
+        if (givenArray == parties) {
+            newCheckbox.dataset.secular = parties[loopCount].secular;
+            newCheckbox.dataset.partysize = parties[loopCount].size;
+        }
+
+        newCheckbox.setAttribute("class", 'mr-2 ml-1 ${checkboxes}');
+        var newLabel = document.createElement("label");
+        if (object.title != null) {
+            newLabel.innerHTML = object.title;
+        }
+
+        if (object.name != null) {
+            newLabel.innerHTML = object.name;
+        }
+
+        newLabel.setAttribute("class", classLabel);
+
+        var newLine = document.createElement("br");
+
+        givenField.append(newLabel);
+        givenField.append(newCheckbox);
+        givenField.append(newLine);
+
+        newCheckbox = null;
+        loopCount++;
+    });
+
+    if (givenArray == parties) {
+        var btnSecular = document.createElement("button");
+        var partyCheckboxes = document.querySelectorAll(".partyCheckbox");
+
+        btnSecular = select.setAttribute("class", "btn btn-primary");
+        btnSecular.innerHTML = "Seculiere partijen";
+        btnSecular.onclick = function () {
+            partyCheckboxes.forEach(element => {
+                if (element.dataset.secular == "true") {
+                    element.checked = true;
+                }
+            });
+        }
+
+        var btnSize = document.createElement("button");
+        var partyCheckboxes = document.querySelectorAll(".partyCheckbox");
+        btnSize.setAttribute("class", "btn btn-primary");
+        btnSize.innerHTML = "Selecteer alle grote partijen";
+        btnSize.onclick = function () {
+            partyCheckboxes.forEach(element => {
+                if (element.dataset.partysize != "0") {
+                    element.checked = true;
+                }
+            });
+        }
+
+        givenField.append(btnSize);
+        givenField.append(btnSecular);
+    }
 }
