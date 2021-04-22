@@ -9,6 +9,7 @@ const optionButtons = document.querySelectorAll(".option");
 const selResult = document.getElementById("parties");
 const Field = document.getElementById("parties");
 var userInput = [];
+var partySelection = [];
 var statementId = 0;
 var select;
 
@@ -78,13 +79,10 @@ function generateCheckboxList(givenArray, givenField) {
     givenArray.forEach(object => {
         var newCheckbox = document.createElement("input");
         newCheckbox.type = "checkbox";
+        newCheckbox.setAttribute("name", parties[loopCount].name);
         newCheckbox.value = loopCount;
-        if (givenArray == parties) {
-            newCheckbox.dataset.secular = parties[loopCount].secular;
-            newCheckbox.dataset.partysize = parties[loopCount].size;
-        }
 
-        newCheckbox.setAttribute("class", 'mr-2 ml-1 ${checkboxes}');
+        newCheckbox.classList.add('mr-2', 'ml-1', `${checkboxes}`);
         var newLabel = document.createElement("label");
         if (object.title != null) {
             newLabel.innerHTML = object.title;
@@ -110,29 +108,48 @@ function generateCheckboxList(givenArray, givenField) {
         var btnSecular = document.createElement("button");
         var partyCheckboxes = document.querySelectorAll(".partyCheckbox");
 
-        btnSecular = select.setAttribute("class", "btn btn-primary");
+        btnSecular.setAttribute("class", "btn btn-primary");
         btnSecular.innerHTML = "Seculiere partijen";
-        btnSecular.onclick = function () {
+        btnSecular.addEventListener("click", function () {
             partyCheckboxes.forEach(element => {
-                if (element.dataset.secular == "true") {
-                    element.checked = true;
-                }
-            });
-        }
+                element.checked = false;
+                var name = element.getAttribute("name");
+                parties.forEach(party => {
+                    if (party.secular == true) {
+                        if (party.name == name) {
+                            element.checked = true;
+                            partySelection.push(name);
+                        }
+                    }
+                });
+            })
+        });
 
         var btnSize = document.createElement("button");
         var partyCheckboxes = document.querySelectorAll(".partyCheckbox");
         btnSize.setAttribute("class", "btn btn-primary");
         btnSize.innerHTML = "Selecteer alle grote partijen";
-        btnSize.onclick = function () {
+        btnSize.addEventListener("click", function () {
             partyCheckboxes.forEach(element => {
-                if (element.dataset.partysize != "0") {
-                    element.checked = true;
-                }
+                var name = element.getAttribute("name");
+                element.checked = false;
+                parties.forEach(party => {
+                    if (party.size > 0) {
+                        if (party.name == name) {
+                            element.checked = true;
+                            partySelection.push(name);
+                        }
+                    }
+                });
             });
-        }
+            createButtonNext();
+        });
 
         givenField.append(btnSize);
         givenField.append(btnSecular);
     }
+}
+
+function createButtonNext() {
+
 }
