@@ -10,8 +10,10 @@ const selResult = document.getElementById("parties");
 const endResult = document.getElementById("results");
 const Field = document.getElementById("parties");
 const back = document.getElementById("button-back");
+const stateSel = document.getElementById("statementSelect");
 var userInput = [];
 var partySelection = [];
+var stateSelect = [];
 var statementId = 0;
 var select;
 
@@ -46,32 +48,66 @@ function keepProgress(choice) {
     display actuele stmt ID
     "terug" knop om naar de vorige stelling te gaan
      */
-
+    console.log(choice);
     if (choice != "terug") {
         userInput[currentSubject] = choice;
         currentSubject++;
     } else {
         currentSubject--;
     }
-
-    if (currentSubject.length = 1) {
+    console.log(userInput);
+    if (currentSubject == 1) {
         back.hidden = false;
     }
 
     if (currentSubject >= subjects.length) {
-        return generateCheckboxList(parties, Field);
+        return keepSubjects(Field);
     }
 
     titleHeader.innerText = subjects[currentSubject].title;
     opinie.innerText = subjects[currentSubject].statement;
-    console.log(userInput);
+
 }
 
-function keepSubjects() {
+function keepSubjects(givenField) {
     /*
     selecteer stellingen die je belangrijk vindt en mee wilt nemen naar eind uitslag
     */
+    statementPara.hidden = true;
+    stateSel.hidden = false;
 
+    var checkboxes = "statementCheckbox";
+    var classLabel = "statementLabel";
+
+    var loopCount = 0;
+    subjects.forEach(object => {
+        var newCheckbox = document.createElement("input");
+        newCheckbox.type = "checkbox";
+        newCheckbox.setAttribute("name", subjects[loopCount].name);
+        newCheckbox.value = loopCount;
+        console.log(object);
+
+        newCheckbox.classList.add('mr-2', 'ml-1', `${checkboxes}`);
+        var newLabel = document.createElement("label");
+        if (object.title != null) {
+            newLabel.innerHTML = object.title;
+        }
+
+        if (object.name != null) {
+            newLabel.innerHTML = object.name;
+        }
+
+        newLabel.setAttribute("class", classLabel);
+
+        var newLine = document.createElement("br");
+
+        givenField.append(newLabel);
+        givenField.append(newCheckbox);
+        givenField.append(newLine);
+
+        newCheckbox = null;
+        loopCount++;
+    });
 }
 
 function generateCheckboxList(givenArray, givenField) {
@@ -80,16 +116,11 @@ function generateCheckboxList(givenArray, givenField) {
     "next" knop die geselecteerde partijen mee neemt
     naar eind resultaat.
     */
-    statementPara.hidden = true;
+    stateSel.hidden = true;
     selResult.hidden = false;
 
     var checkboxes = "";
     var classLabel = "";
-
-    if (givenArray == subjects) {
-        checkboxes = "statementCheckbox";
-        classLabel = "statementLabel";
-    }
 
     if (givenArray == parties) {
         checkboxes = "partyCheckbox";
