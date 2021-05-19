@@ -61,7 +61,7 @@ function keepProgress(choice) {
     }
 
     if (currentSubject >= subjects.length) {
-        return keepSubjects(Field);
+        return keepSubjects(stateSel);
     }
 
     titleHeader.innerText = subjects[currentSubject].title;
@@ -79,22 +79,21 @@ function keepSubjects(givenField) {
     var checkboxes = "statementCheckbox";
     var classLabel = "statementLabel";
 
-    var loopCount = 0;
-    subjects.forEach(object => {
+    subjects.forEach((subject, index) => {
         var newCheckbox = document.createElement("input");
         newCheckbox.type = "checkbox";
-        newCheckbox.setAttribute("name", subjects[loopCount].name);
-        newCheckbox.value = loopCount;
-        console.log(object);
+        newCheckbox.setAttribute("name", subject.title);
+        newCheckbox.value = index;
+        console.log(subject);
 
         newCheckbox.classList.add('mr-2', 'ml-1', `${checkboxes}`);
         var newLabel = document.createElement("label");
-        if (object.title != null) {
-            newLabel.innerHTML = object.title;
+        if (subject.title != null) {
+            newLabel.innerHTML = subject.title;
         }
 
-        if (object.name != null) {
-            newLabel.innerHTML = object.name;
+        if (subject.name != null) {
+            newLabel.innerHTML = subject.name;
         }
 
         newLabel.setAttribute("class", classLabel);
@@ -106,8 +105,8 @@ function keepSubjects(givenField) {
         givenField.append(newLine);
 
         newCheckbox = null;
-        loopCount++;
     });
+    console.dir(givenField);
 }
 
 function generateCheckboxList(givenArray, givenField) {
