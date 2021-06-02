@@ -11,7 +11,9 @@ const endResult = document.getElementById("results");
 const Field = document.getElementById("parties");
 const back = document.getElementById("button-back");
 const stateSel = document.getElementById("statementSelect");
+const nextParty = document.getElementById("button-next");
 var userInput = [];
+var partyChoice = [];
 var partySelection = [];
 var stateSelect = [];
 var statementId = 0;
@@ -29,6 +31,27 @@ function start() {
             keepProgress(element.value);
         })
     });
+
+    for (i = 0; i < parties.length; i++) {
+        partyChoice.push({
+            party: parties[i].name,
+            opinions: fetchPartyOpinion(parties[i].name),
+            score: 0
+        });
+    }
+}
+
+function fetchPartyOpinion(party) {
+    var opinionArray = [];
+
+    subjects.forEach(subject => {
+        subject.parties.forEach(partyInSubject => {
+            if (partyInSubject.name == party) {
+                opinionArray.push(partyInSubject.position);
+            }
+        });
+    });
+    return opinionArray
 }
 
 /* 
@@ -48,6 +71,9 @@ function keepProgress(choice) {
     display actuele stmt ID
     "terug" knop om naar de vorige stelling te gaan
      */
+
+
+
     console.log(choice);
     if (choice != "terug") {
         userInput[currentSubject] = choice;
@@ -61,6 +87,8 @@ function keepProgress(choice) {
     }
 
     if (currentSubject >= subjects.length) {
+        statementPara.hidden = true;
+        stateSel.hidden = false;
         return keepSubjects(stateSel);
     }
 
@@ -69,13 +97,12 @@ function keepProgress(choice) {
 
 }
 
+
+
 function keepSubjects(givenField) {
     /*
     selecteer stellingen die je belangrijk vindt en mee wilt nemen naar eind uitslag
     */
-    statementPara.hidden = true;
-    stateSel.hidden = false;
-
     var checkboxes = "statementCheckbox";
     var classLabel = "statementLabel";
 
@@ -106,18 +133,19 @@ function keepSubjects(givenField) {
 
         newCheckbox = null;
     });
-    console.dir(givenField);
+    nextParty.addEventListener("click", function () {
+        stateSel.hidden = true;
+        selResult.hidden = false;
+        generatePartyList(parties, Field);
+    });
 }
 
-function generateCheckboxList(givenArray, givenField) {
+function generatePartyList(givenArray, givenField) {
     /*
     display partij namen
     "next" knop die geselecteerde partijen mee neemt
     naar eind resultaat.
     */
-    stateSel.hidden = true;
-    selResult.hidden = false;
-
     var checkboxes = "";
     var classLabel = "";
 
@@ -199,6 +227,8 @@ function generateCheckboxList(givenArray, givenField) {
         btnEnd.setAttribute("class", "btn btn-primary");
         btnEnd.innerHTML = "naar eind-resultaat";
         btnEnd.addEventListener("click", function () {
+            selResult.hidden = true;
+            endResult.hidden = false;
             calculateResults();
         });
 
@@ -210,10 +240,18 @@ function generateCheckboxList(givenArray, givenField) {
 
 function calculateResults() {
     /*
-    toon  partij/partijen die het meest overeenkomt(komen) met jouw opinie
+    toon  partij/partijen die het meest overeenkomt(komen) met jouw opinie(s)
     */
-    selResult.hidden = true;
-    endResult.hidden = false;
+
+    for (var a = 0; a < partyChoice.length; a++) {
+        if (partyChoice[a] != null) {
+            for (var b = 0; b < userInput.length; b++) {
+                if (userInput[b] == partyChoice[a].opinions[b]) {
+                    partyChoice[a].score++;
+                }
+            }
+        }
+    }
 
     return
 }
