@@ -1,7 +1,7 @@
 let currentSubject = 0;
 
 const jumbotron = document.querySelector(".jumbotron");
-const startButton = document.getElementById("startBtn");
+const startButton = document.getElementById("start-button");
 const titleHeader = document.getElementById("title");
 const statementPara = document.getElementById("statement");
 const opinie = document.getElementById("opinie");
@@ -18,6 +18,8 @@ var partySelection = [];
 var stateSelect = [];
 var statementId = 0;
 var select;
+
+startButton.onclick = start;
 
 /* geen uitleg nodig, dit start de stemwijzer */
 
@@ -252,6 +254,8 @@ function calculateResults() {
             }
         }
     }
+
+
 
     return
 }
