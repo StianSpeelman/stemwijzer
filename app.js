@@ -162,6 +162,9 @@ function generatePartyList(givenArray, givenField) {
         newCheckbox.type = "checkbox";
         newCheckbox.setAttribute("name", parties[loopCount].name);
         newCheckbox.value = loopCount;
+        newCheckbox.onclick = function (e) {
+            document.getElementById("party-continue").disabled = false;
+        }
 
         newCheckbox.classList.add('mr-2', 'ml-1', `${checkboxes}`);
         var newLabel = document.createElement("label");
@@ -226,12 +229,16 @@ function generatePartyList(givenArray, givenField) {
         });
 
         var btnEnd = document.createElement("button");
+        btnEnd.disabled = true;
+        btnEnd.id = "party-continue";
         btnEnd.setAttribute("class", "btn btn-primary");
         btnEnd.innerHTML = "naar eind-resultaat";
         btnEnd.addEventListener("click", function () {
             selResult.hidden = true;
             endResult.hidden = false;
             calculateResults();
+            /* sortResults(); */
+            displayResults();
         });
 
         givenField.append(btnSize);
@@ -250,6 +257,9 @@ function calculateResults() {
             for (var b = 0; b < userInput.length; b++) {
                 if (userInput[b] == partyChoice[a].opinions[b]) {
                     partyChoice[a].score++;
+                    if (stateSelect[b] == true) {
+                        partyChoice[a].score++;
+                    }
                 }
             }
         }
@@ -258,4 +268,30 @@ function calculateResults() {
 
 
     return
+}
+
+/* function sortResults() {
+    items.sort(function (a, b) {
+        return a.value - b.value;
+    })
+} */
+
+function displayResults() {
+    partyChoice.sort(function (x, y) {
+        return y.score - x.score;
+    });
+
+    var partyNames = document.getElementsByClassName("card-title");
+    console.log(partyNames);
+
+    var partyname1 = partyNames[0];
+
+    partyname1.innerHTML = partyChoice[0].party;
+
+    /* var partyScores = document.getElementsByClassName("card-text");
+
+    var partyScore1 = partyScores[0];
+
+    partyScore1.innerHTML = partyChoice[0]; */
+
 }
