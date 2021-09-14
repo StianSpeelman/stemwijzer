@@ -218,7 +218,6 @@ function generatePartyList(givenArray, givenField) {
             partyCheckboxes.forEach(element => {
                 var name = element.getAttribute("name");
                 element.checked = false;
-                document.getElementById("party-continue").disabled = false;
                 parties.forEach(party => {
                     if (party.size > 0) {
                         if (party.name == name) {
@@ -227,6 +226,7 @@ function generatePartyList(givenArray, givenField) {
                         }
                     }
                 });
+                document.getElementById("party-continue").disabled = false;
             });
         });
 
@@ -277,9 +277,20 @@ function displayResults() {
         return y.score - x.score;
     });
 
-    for (var i = 0; i < 3; i++) {
-        var para = document.createElement("P");
-        para.innerHTML = (i + 1) + ". " + partyChoice[i].party;
-        document.getElementsByClassName("card")[0].appendChild(para);
-    }
+    var partyNames = document.getElementsByClassName("card-title");
+    console.log(partyNames);
+    partyChoice.forEach((party) => {
+        
+    });
+
+    var partyname1 = partyNames[0];
+
+    partyname1.innerHTML = partyChoice[0].party;
+
+    /* var partyScores = document.getElementsByClassName("card-text");
+
+    var partyScore1 = partyScores[0];
+
+    partyScore1.innerHTML = partyChoice[0]; */
+
 }
