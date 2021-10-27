@@ -2,85 +2,72 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.2/css/all.css"
-        integrity="sha384-vSIIfh2YWi9wW0r9iZe7RJPrKwp6bG+s9QZMoITbCckVJqGCCRhc+ccxNcdpHuYu" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+	<link rel="stylesheet" type="text/css" href="assets/style/css/style.css">
+	<script src="https://kit.fontawesome.com/ac9217cc6c.js" crossorigin="anonymous"></script>
     <link rel="icon" href="img/favicon.ico">
-    <title>School stemwijzer</title>
+    <title>School Stemwijzer</title>
 </head>
 
 <body>
-    <div class="container">
 
-        <div id="start-jumbotron" class="jumbotron border rounded p-4 m-4">
-            <h1 class="display-4">Stemwijzer</h1>
-            <p class="lead">Klik op "Start" om de stemwijzer te starten.</p>
-            <p class="lead">
-                <button id="start-button" class="btn btn-primary">Start</button>
-            </p>
-        </div>
-        <div id="statement" class="border rounded p-4 m-4" hidden>
-            <h1 id="title" class="text-center">Vraag?</h1>
-            <h3 id="opinie" class="text-center">Statement</h3>
-            <div class="text-center">
-                <button type="button" id="button-back" class="btn btn-light btn-lg option" value="terug" hidden>
-                    <i class="fas fa-angle-left"></i>
-                </button>
-                <button type="button" id="button-yes" class="btn btn-success btn-lg option" value="pro"><i
-                        class="fas fa-thumbs-up"></i>
-                    <b>Eens</b></button>
-                <button type="button" id="button-none" class="btn btn-light btn-lg option" value="none"><b>Niet
-                        mee
-                        eens/niet mee
-                        oneens</b></button>
-                <button type="button" id="button-no" class="btn btn-danger btn-lg option" value="contra"><i
-                        class="fas fa-thumbs-down"></i>
-                    <b>Oneens</b></button>
-            </div>
-        </div>
-        <div id="statementSelect" class="border rounded p-4 m-4" hidden>
-            <h1 class="text-center">Selecteer statements die voor U belangrijk zijn en u mee wilt nemen met het eind
-                resultaat.</h1>
-            <div class="col-md-4" id="button-lining">
-                <div class="d-flex justify-content-end">
-                    <button id="button-next" class="btn btn-light btn-lg option" value="next">
-                        <i class="fas fa-angle-right"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div id="parties" class="border rounded p-4 m-4" hidden>
-            <h1 class="text-center">Selecteer partijen om mee te nemen naar eind resultaat</h1>
-            <div class="col-md-4" id="button-lining">
-                <div class="d-flex justify-content-end"></div>
-                <button type="button" type="button-continue" class="btn btn-light btn-lg option" value="next" disabled>
-                    <i class="fas fa-angle-right"></i>
-                </button>
-            </div>
-        </div>
+<div id='pagina' class='w3-content w3-panel w3-white'>
+	<buton id='back' class='w3-btn w3-circle w3-light-grey w3-xlarge w3-padding-16'> <i class="fas fa-arrow-left"></i> </buton>
+	
+
+    <div id='Header'class='w3-container'>
+    	<img id='logo' src="img/logo.png" alt="stemwijzer">
+		<h3 id='stemWijzerHeader'><b> StemWijzer Tweede Kamer</b></h3>
     </div>
-    </div>
-    <div id="results" class="border rounded p-4 m-4" hidden>
-        <div id="results" class="p-4 m-4">
-            <h1 id="title" class="text-center">Resultaten</h1>
-            <div id="party-results" class="d-flex justify-content-end"></div>
-            <div class="card">
-            </div>
-        </div>
-    </div>
-    </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-        crossorigin="anonymous"></script>
-    <script src="http://stemwijzer.dvc-icta.nl/testdata.js"></script>
-    <script src="app.js"></script>
+       
+
+    <div id='infoText'class='w3-container'>
+ 		<h3 id='blueText' class='w3-text-cyan'><b> Test uw politieke voorkeur aan de hand van 30 stellingen </b></h3>
+		<h3 id='questiongText' class='w3-text-black'><b> StemWijzer vragen </b></h3>
+	</div>
+	
+	<div class='w3-container '>
+		<buton id='startButton' class='w3-btn w3-black w3-hover-blue w3-right w3-xlarge'> Start </buton>
+	</div>	
+
+
+	<div id='buttons' class='w3-container'>
+	    <buton id='pro' class='w3-btn w3-black w3-hover-blue w3-xlarge'> eens </buton>
+        <buton id='none' class='w3-btn w3-black w3-hover-blue w3-xlarge'> Niet mee eens/Niet mee oneens </buton>
+		<buton id='contra' class='w3-btn w3-black w3-hover-blue w3-xlarge'> oneens </buton>		
+		<buton id='skip' class='w3-btn w3-text-blue-grey w3-xlarge'> sla deze vraag over <i class="fas fa-arrow-right"></i> </buton>
+
+	</div>
+		<div id='checkboxList'class='w3-container w3-panel'>
+	</div>
+	
+    <div id='info'>
+		<div id='beperking'class='w3-container'>
+			<a href="https://tweedekamer2021.stemwijzer.nl/#/xsable/start" class="w3-block"> <i class="fas fa-user-cog w3-text-cyan fa-3x"></i>   Bekijk de toegankelijke versie voor mensen met een visuele beperking </a>
+		</div>
+
+		<div id='cookies'class='w3-container w3-border-bottom '>
+			<p class="w3-block"> <i class="fas fa-unlock-alt w3-text-cyan fa-3x "></i> De StemWijzer maakt geen gebruik van cookies. klik hier voor de volledige privacy statement </p>
+		</div>
+    	<div class='w3-stretch w3-light-grey w3-padding-large'>
+    		<h4 class='w3-text-dark-grey w3-container'><b> Of blik terug met: "de StemmenTracker"</b></h4>
+    		<p class='w3-container'> Wat hebben de partijen in het verleden waargemaakt van hun verkiezingsbeloften? 'Track' uw stem met de Stemmentracker, een website die terugblikt op 30 Tweede Kamerstemmingen van de afgelopen regeerperiode. Met welke partij stemde u mee? </p>
+    	</div>
+
+    	<div id='importantSubjects' class='w3-stretch w3-light-grey w3-padding-large'>
+    
+    	</div>
+
+		<div class='footer'>
+		</div>
+	</div>
+	<div>
+		<pre id="namePrint"></pre>
+		<pre id="scorePrint"></pre>
+	</div>
+
+    <script src="assets/js/testdata.js"></script>
+	<script src="assets/js/app.js"></script>
+</div>
 </body>
-
 </html>
-</body>

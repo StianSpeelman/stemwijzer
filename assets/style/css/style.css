@@ -1,0 +1,20 @@
+body{
+	background-image: url("../../../img/background.jpg");
+	background-size: cover !important;
+}
+#pagina{
+	min-height: 600px;
+}
+#vindenPartijen{
+    margin-top: 50px;
+}
+.checkboxDiv{
+	display: inline-block;
+	margin: 10px;
+}
+.w3-check{
+	float: left;
+}
+p{
+	float: left;
+}
