@@ -109,7 +109,7 @@ function questions(){
 		var checkboxText = document.getElementById('checkboxText' + checkboxNumber).innerText;
 		
   		if (checkbox.checked == true){
-			  console.log('checkboxTrue')
+			  console.log('checkboxTrue');
 
 			  // checks if text == data.js // 
 			  for(c = 0; c < subjects.length; c++) {
@@ -214,6 +214,7 @@ function takePoliticalparty(){
 			if(answers[b] == partyPosition){
 				console.log("je bent het eens met " + partyName + ", jullie hadden beide " + partyPosition);
 				var foundIndex = partyScore.findIndex((partyScoreObject) => partyScoreObject.name == partyName);
+				// var posIndex = partyScore.findIndex((partyScoreObject) => partyScoreObject.position == partyName);
 				
 				
 				partyScore[foundIndex].score++;
@@ -223,13 +224,13 @@ function takePoliticalparty(){
 					// 	if(partyName === partyScore[c].name){
 					// 		Checker = document.getElementById("checkbox" + c);
 					// 		if(currentParty[a].position == answers[a].position && Checker.checked == true){
-					// 			partyScore[a].score++;
+					// 			partyScore[posIndex].score++;
 					// 		}
 					// 	}
 					// }
 			}
 			else{
-				console.log("je bent het niet eens met " + partyName);
+				console.log("je bent het niet eens met " + partyName + ", die koos " + partyPosition);
 			}
 		  }
 		}
